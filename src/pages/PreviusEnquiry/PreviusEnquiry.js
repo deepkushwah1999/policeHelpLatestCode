@@ -16,7 +16,7 @@ const PreviusEnquiry = props => {
 
   const { users } = props;
   const { getEnquirydata } = users
-  console.log("+getEnquirydatagetEnquirydata", getEnquirydata);
+  // console.log("+getEnquirydatagetEnquirydata", getEnquirydata);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#FFF' }}>
@@ -43,9 +43,9 @@ const PreviusEnquiry = props => {
               <View key={element.id} style={{ borderWidth: 1, marginVertical: 10, borderRadius: 15, borderColor: '#000', padding: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                 <View>
-                  <Text style={{ fontWeight: '700', textAlign: 'center', fontSize: 16 }}>{element.name}
+                  <Text style={{ fontWeight: '700', textAlign: 'center', fontSize: 16,color:'#000' }}>{element.name}
                   </Text>
-                  <Text style={{ fontWeight: '300', marginTop: 5, fontSize: 13 }}>{moment(element.created_at).format('DD/MM/YYYY')}
+                  <Text style={{ fontWeight: '300', marginTop: 5, fontSize: 13,color:'#000' }}>{moment(element.created_at).format('DD/MM/YYYY')}
                   </Text>
                   <Text style={{ fontWeight: '400', marginTop: 5, fontSize: 14, color: '#000', }}>{element.name}
 

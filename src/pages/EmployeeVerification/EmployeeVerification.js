@@ -120,7 +120,7 @@ const EmployeeVerification = props => {
       });
 
       props.dispatch(userActions.employeVerify(data, props));
-    
+
     }
   }
 
@@ -176,6 +176,7 @@ const EmployeeVerification = props => {
 
           <TextInput
             placeholder='Name Of The Company'
+            placeholderTextColor="#000"
             onChangeText={(text) => setcompanyName(text)}
 
             value={companyName}
@@ -185,6 +186,7 @@ const EmployeeVerification = props => {
           {companyNameError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{companyNameError}</Text>}
           <TextInput
             placeholder='Name of Concerned person'
+            placeholderTextColor="#000"
             onChangeText={(text) => setconcernedPerson(text)}
 
             value={concernedPerson}
@@ -193,6 +195,7 @@ const EmployeeVerification = props => {
           {concernPersonError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{concernPersonError}</Text>}
           <TextInput
             placeholder='Email of Concerned Person '
+            placeholderTextColor="#000"
             onChangeText={(text) => setconcernedEmail(text)}
 
             value={concernedEmail}
@@ -201,8 +204,8 @@ const EmployeeVerification = props => {
           />
           {concernedEmailError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{concernedEmailError}</Text>}
           <TextInput
-            placeholder='Number of Concerned Person  '
-
+            placeholder='Number of Concerned Person'
+            placeholderTextColor="#000"
             value={concernednumber}
             keyboardType='number-pad'
             maxLength={10}
@@ -222,7 +225,7 @@ const EmployeeVerification = props => {
               :
               <>
                 <TouchableOpacity onPress={() => downloadFile()} style={{ flexDirection: 'row' }}>
-                  <Text style={{}}>  Download Simple File  </Text>
+                  <Text style={{color:'#000'}}>  Download Simple File  </Text>
 
                   <Image source={require('../../Images/Downlord.png')} style={{ height: 20, width: 20, }} />
                 </TouchableOpacity>
@@ -270,7 +273,7 @@ const EmployeeVerification = props => {
       </View>
       <TouchableOpacity style={{ width: '80%', alignSelf: 'center', borderRadius: 20, backgroundColor: '#000266', padding: 12, bottom: 30 }}
         onPress={() => SendEmployeedata()}
-      // onPress={() => props.navigation.navigate('EmpLoading')}
+      
       >
         <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>Submit
         </Text>

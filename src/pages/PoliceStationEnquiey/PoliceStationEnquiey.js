@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StatusBar, Image, TextInput, ScrollView, PermissionsAndroid, Platform,Modal,ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, StatusBar, Image, TextInput, ScrollView, PermissionsAndroid, Platform, Modal, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -6,21 +6,23 @@ import Geolocation from '@react-native-community/geolocation'
 import Toast from 'react-native-toast-message'
 import { connect } from 'react-redux';
 import { userActions } from '../../_actions';
+import StationResult from '../../constantComponent/StationResult';
 const PoliceStationEnquiey = props => {
 
   const [pincode, setpincode] = useState("")
   const [pincodeError, setpincodeError] = useState("")
-  const [Token, setToken] = useState("");
+
   const [loading, setLoading] = useState(false);
+  const [modelresult, setModelresult] = useState(false);
+  const [station, setStation] = useState([]);
 
 
   useEffect(() => {
     requestCameraPermission()
-    // getUser()
-
 
   }, [])
 
+  console.log("@@@@@@@@@", station);
 
 
 
@@ -53,8 +55,8 @@ const PoliceStationEnquiey = props => {
       const data = await response.json();
       console.log("Acctual Addredd", data);
       const pincode = data.address.postcode;
-      console.log("pincode ",pincode);
-      setpincode(data&&data.address&&data.address.postcode?data.address.postcode:null)
+      console.log("pincode ", pincode);
+      setpincode(data && data.address && data.address.postcode ? data.address.postcode : null)
 
     });
   }
@@ -84,11 +86,10 @@ const PoliceStationEnquiey = props => {
 
 
   const searchStation = () => {
-    const {users}=props;
-    let {registerToken, }=users
+    const { users } = props;
+    let { registerToken, } = users
     const registrationResult = handleRegistration();
     setLoading(true)
-    setTimeout(() => { setLoading(false) }, 1500)
 
     if (registrationResult.success) {
 
@@ -96,53 +97,25 @@ const PoliceStationEnquiey = props => {
       const FormData = require('form-data');
       let data = new FormData();
       data.append('postal_code', pincode);
-      // props.dispatch(userActions.searchPoliceStation(data,props))
-
-
       let config = {
         method: 'post',
-        maxBodyLength: Infinity,
         url: 'https://policehelp.in/api/policeenquiry',
         headers: {
           'Authorization': `Bearer ${registerToken}`,
           'Content-Type': 'multipart/form-data',
-
         },
         data: data
       };
       axios.request(config)
         .then((response) => {
           console.log("Search data ", JSON.stringify(response.data));
-          console.log("Search data ", response.data);
-          console.log(response.data.message === "Enquiry Fetched  successfully");
-        
-
-          if (response.data&&response.data.items && response.data.items[0] &&response.data.message === "Enquiry Fetched  successfully") {
-            props.navigation.navigate('PoliceStationEnquieyresult', { 'policedata': response.data.items })
-
-            console.log("we have a data ");
-            Toast.show({
-              text1: response.data.message,
-              type: "success"
-            })
-          }
-       
-          if (response.data.message === "Please  Pay and fetch") {
-            props.navigation.navigate('PoliceStationEnquieyresult', { 'policedata': response.data.items })
-            console.log("we have a data hhjhjghg");
-            Toast.show({
-              text1: response.data.message,
-              type: "success"
-            })
-          }
-
-          else {
-          
-          }
-
-
+          console.log("Search data ", response.data.items);
+          setStation(response.data.items);
+          setLoading(false);
+          setModelresult(true)
         })
         .catch((error) => {
+          setLoading(false)
           console.log(error);
         });
     }
@@ -170,18 +143,19 @@ const PoliceStationEnquiey = props => {
         <View style={{
           width: '95%', height: 40, borderRadius: 18, borderWidth: 1, borderColor: '#2E2684', flexDirection: 'row', elevation: 5, backgroundColor: 'white',
         }}>
-          <TextInput style={{ width: '80%', marginLeft: 10, fontSize: 15,color:'#000' }}
-            placeholder='Enter Pin Code '
+          <TextInput style={{ width: '80%', marginLeft: 10, fontSize: 15, color: '#000' }}
+            placeholder='Enter Pin Code / Area Name'
+            placeholderTextColor="#000"
             // onFocus={() => getLocation()}
             onChangeText={(text) => setpincode(text)}
-            keyboardType='number-pad'
-            maxLength={10}
+            keyboardType='numbers-and-punctuation'
+            // maxLength={10}
 
             value={pincode}
           />
 
 
-          <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 10 }} onPress={()=>getLocation()}>
+          <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 10 }} onPress={() => getLocation()}>
 
             <Image style={{ height: 23, width: 23, resizeMode: 'contain' }} source={require('../../Images/location.png')} />
           </TouchableOpacity>
@@ -196,25 +170,25 @@ const PoliceStationEnquiey = props => {
           </Text>
         </TouchableOpacity>
         <Modal
-        animationType="fade"
-        transparent={true}
-        visible={loading}
-      >
-        <View
-          style={{
-            marginTop: 240,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(231, 231, 231,0)', backfaceVisibility: 'visible'
-          }}>
-          <ActivityIndicator color={"#6CC417"} size={'large'} />
-          <Text style={{ color: "#6CC417", fontSize: 13, }}>
-            Loading....
-          </Text>
-        </View>
-      </Modal>
+          animationType="fade"
+          transparent={true}
+          visible={loading}
+        >
+          <View
+            style={{
+              marginTop: 240,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(231, 231, 231,0)', backfaceVisibility: 'visible'
+            }}>
+            <ActivityIndicator color={"#6CC417"} size={'large'} />
+            <Text style={{ color: "#6CC417", fontSize: 13, }}>
+              Loading....
+            </Text>
+          </View>
+        </Modal>
 
-
+        <StationResult addmodel={modelresult} props={props} stationRes={station} closeModel={() => setModelresult(!modelresult)} />
 
       </View>
 

@@ -23,13 +23,19 @@ const LegalConsultation = props => {
     { "label": "Assam", "value": "Assam" },
     { "label": "Bihar", "value": "Bihar" },
     { "label": "Chhattisgarh", "value": "Chhattisgarh" },
+    { "label": "Dadra and Nagar Haveli", "value": "Dadra and Nagar Haveli" },
+    { "label": "Daman and Diu", "value": "Daman and Diu" },
+    { "label": "Delhi", "value": "Delhi" },
     { "label": "Goa", "value": "Goa" },
     { "label": "Gujarat", "value": "Gujarat" },
     { "label": "Haryana", "value": "Haryana" },
     { "label": "Himachal Pradesh", "value": "Himachal Pradesh" },
+    { "label": "Jammu and Kashmir", "value": "Jammu and Kashmir" },
     { "label": "Jharkhand", "value": "Jharkhand" },
     { "label": "Karnataka", "value": "Karnataka" },
     { "label": "Kerala", "value": "Kerala" },
+    { "label": "Ladakh", "value": "Ladakh" },
+    { "label": "Lakshadweep", "value": "Lakshadweep" },
     { "label": "Madhya Pradesh", "value": "Madhya Pradesh" },
     { "label": "Maharashtra", "value": "Maharashtra" },
     { "label": "Manipur", "value": "Manipur" },
@@ -37,6 +43,7 @@ const LegalConsultation = props => {
     { "label": "Mizoram", "value": "Mizoram" },
     { "label": "Nagaland", "value": "Nagaland" },
     { "label": "Odisha", "value": "Odisha" },
+    { "label": "Puducherry", "value": "Puducherry" },
     { "label": "Punjab", "value": "Punjab" },
     { "label": "Rajasthan", "value": "Rajasthan" },
     { "label": "Sikkim", "value": "Sikkim" },
@@ -47,6 +54,7 @@ const LegalConsultation = props => {
     { "label": "Uttarakhand", "value": "Uttarakhand" },
     { "label": "West Bengal", "value": "West Bengal" }
   ]);
+
   const [itemsb, setItemsb] = useState([
     { "label": "Civil", "value": "Civil" },
     { "label": "Criminal", "value": "Criminal" },
@@ -55,21 +63,6 @@ const LegalConsultation = props => {
   const [token, setToken] = useState("")
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   getUser()
-
-  // }, [])
-  // const getUser = async () => {
-  //   try {
-  //     const userData = JSON.parse(await AsyncStorage.getItem("LogToken"))
-  //     if (userData !== null) {
-  //       setToken(userData);
-  //       console.log("Cosultation tokoen", userData);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
 
   const [name, setname] = useState("")
@@ -164,7 +157,7 @@ const LegalConsultation = props => {
       data.append('consultation_type', showBvalue);
 
 
-      props.dispatch(userActions.LegalConsultaion(data,props))
+      props.dispatch(userActions.LegalConsultaion(data, props))
 
 
 
@@ -189,45 +182,37 @@ const LegalConsultation = props => {
       </View>
 
       <View style={{ flex: 1, marginHorizontal: 10, marginTop: 30 }}>
-        <Text style={{ marginLeft: 20, fontSize: 12 }}>Fill Up the below mentioned form</Text>
+        <Text style={{ marginLeft: 20, fontSize: 12, color: '#000' }}>Fill Up the below mentioned form</Text>
 
         <TextInput
           placeholder='Name'
-
+          placeholderTextColor="grey"
           value={name}
           // secureTextEntry={true}
           onChangeText={(text) => setname(text)}
-          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7,color:'#000' }}
+          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7, color: '#000' }}
         />
         {nameError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{nameError}</Text>}
         <TextInput
           placeholder='Email'
-
+          placeholderTextColor="grey"
           value={email}
           keyboardType='email-address'
           onChangeText={(text) => setemail(text)}
-          // secureTextEntry={true}
-          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7,color:'#000' }}
+          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7, color: '#000' }}
         />
         {EmailError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{EmailError}</Text>}
         <TextInput
           placeholder='Mobile Number'
-
+          placeholderTextColor="grey"
           value={mobile}
           onChangeText={(text) => setmobile(text)}
-
           keyboardType='number-pad'
-          maxLength={10}            // secureTextEntry={true}
-          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7,color:'#000' }}
+          maxLength={10}
+          style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8, margin: 7, color: '#000' }}
         />
         {MobileError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{MobileError}</Text>}
-        {/* <TextInput
-            placeholder='State '
-         
-            value=''
-            secureTextEntry={true}
-            style={{ borderWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', padding: 7, borderRadius: 8,margin:7 }}
-          /> */}
+
         <DropDownPicker
           open={open}
           //  zIndex={2000}
@@ -270,12 +255,12 @@ const LegalConsultation = props => {
             isChecked={isSelected}
             leftText={"CheckBox"}
           />
-          <Text style={{ fontSize: 12 }}>I have read & agreed to the company’s Teems and Conditions, disclaimer and refund policy. and also ready to accept calls, SMS, emails, etc.
+          <Text style={{ fontSize: 13,color:'#000' }}>I have read & agreed to the company’s Teems and Conditions, disclaimer and refund policy. and also ready to accept calls, SMS, emails, etc.
           </Text>
 
         </View>
 
-        
+
         {isSelectederror !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{isSelectederror}</Text>}
 
 
@@ -304,9 +289,9 @@ const LegalConsultation = props => {
         </View>
       </Modal>
       <TouchableOpacity style={{ width: '80%', alignSelf: 'center', borderRadius: 20, backgroundColor: '#000266', padding: 12, bottom: 30 }} onPress={() => Submit_Data()}
-      // onPress={() => props.navigation.navigate('LegalLoading')}
+    
       >
-        <Text style={{ color: 'white', textAlign: 'center', fontSize: 15 }}>Request a call back
+        <Text style={{ color: 'white', textAlign: 'center', fontSize: 15, }}>Request a call back
 
         </Text>
       </TouchableOpacity>

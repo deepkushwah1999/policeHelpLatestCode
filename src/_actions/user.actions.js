@@ -284,6 +284,7 @@ function login(formData, props) {
                 } else {
                     let message = users && users.loginData && users.loginData.message ? users.loginData.message : ''
                     dispatch(alertActions.success("User Login Successfully "));
+                    console.log("users.loginDatausers.loginData",users.loginData);
                     dispatch(success(users));
                     props.navigation.navigate('Home')
                     props.navigation.reset({

@@ -193,24 +193,10 @@ const ForgetPassword = props => {
         <Text style={{ fontSize: 15, textAlign: 'center', color: '#000266', marginTop: 30 }}>Continue With "{email}"</Text>
         <View style={{ flex: 1, }}>
 
-          {/* <TextInput
-              placeholder='Mail Id'
-              placeholderTextColor="black"
-              style={{ borderBottomWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', margin: 5, marginTop: 50,color:'#000' }}
-              keyboardType='email-address'
-              onChangeText={(text) => setemail(text)}
-              value={email}
-            /> */}
+         
           <AnimatedInput value={password} onChangeText={setpassword} placeholder="Enter New Password" placeholderTextColor="black" secureTextEntry={true} />
           {passwordError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{passwordError}</Text>}
-          {/* <TextInput
-              placeholder='Password'
-              placeholderTextColor="black"
-              style={{ borderBottomWidth: 1, borderColor: '#000266', width: '90%', alignSelf: 'center', margin: 5,color:'#000' }}
-              secureTextEntry={true}
-              onChangeText={(text) => setpassword(text)}
-              value={password}
-            /> */}
+       
           <AnimatedInput value={confirmePassword} onChangeText={setconfirmePassword} placeholder="Confirme Password" placeholderTextColor="black" secureTextEntry={true} />
           {ConfirmPasswordError !== "" && <Text style={{ color: 'red', marginHorizontal: 20 }}>{ConfirmPasswordError}</Text>}
 
@@ -238,12 +224,7 @@ const ForgetPassword = props => {
             </View>
           </Modal>
 
-          {/* <Text style={{marginTop:20 ,textAlign:'center',color:'#000266'}}>or Login With</Text>
-      <View style={{flexDirection:'row',alignSelf:'center'}}>
-        <Image  source={require('../../Images/fbicon.png')} style={{height:25,width:25,margin:10,resizeMode:'contain'}}/>
-        <Image  source={require('../../Images/mail.png')} style={{height:25,width:25,margin:10,resizeMode:'contain'}}/>  
-         <Image  source={require('../../Images/twitter.png')} style={{height:25,width:25,margin:10,resizeMode:'contain'}}/> 
-         </View> */}
+        
 
         </View>
       </View>
@@ -262,8 +243,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     marginHorizontal: 20,
     borderBottomColor: '#000266',
-    // borderRadius: 5,
-    // borderColor: '#999',
+  
     marginBottom: 10,
     marginTop: 25
   },

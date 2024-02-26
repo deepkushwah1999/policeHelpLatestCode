@@ -26,7 +26,7 @@ const LegalLoading = props => {
       <View style={{ flex: 1, marginHorizontal: 30, marginTop: -50, justifyContent: 'center', alignItems: 'center' }}>
 
         <Image source={require('../../Images/submit.gif')} style={{ height: 150, width: 150, resizeMode: 'contain' }} />
-        <Text style={{ textAlign: 'center', fontSize: 13 }}>Form has been submitted successfullyour team will call you for further assistance
+        <Text style={{ textAlign: 'center', fontSize: 13,color:'#000' }}>Form has been submitted successfullyour team will call you for further assistance
         </Text>
         <TouchableOpacity style={{ width: '40%', alignSelf: 'center', borderRadius: 20, backgroundColor: '#000266', padding: 6, marginTop: 25 }} onPress={() => props.navigation.navigate('Home')}>
           <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>Back  </Text>
